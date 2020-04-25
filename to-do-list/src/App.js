@@ -1,12 +1,13 @@
 import React from 'react';
 import listSvg from './assets/img/list.svg';
-import Index from './Components/List'
+import addSvg from './assets/img/add.svg';
+import List from './Components/List/List'
 
 function App() {
   return (
   <div className="todo">
     <div className="todo__sidebar">
-      <Index items={[
+      <List items={[
         {
           icon:  <img src={listSvg} alt="Index icon"/>,
           name: 'Все задачи',
@@ -15,7 +16,7 @@ function App() {
       ]
       }
       />
-      <Index items={[
+      <List items={[
         {
           color: "green",
           name: 'Покупки'
@@ -27,18 +28,27 @@ function App() {
         },
         {
           color: "pink",
-          name: 'Фильмы и сериалы'
+          name: 'Фильмы и сериалы',
+          active: true
         },
       ]
       }
+             isRemovable
       />
-
-
+      <List items={[
+        {
+          className: "list__add-button",
+          icon: <img src={addSvg} alt="Index icon" />,
+          name: 'Добавить список'
+        },
+      ]
+      }
+            isRemovable
+      />
 
 
     </div>
     <div className="todo__tasks">
-
 
     </div>
   </div>
