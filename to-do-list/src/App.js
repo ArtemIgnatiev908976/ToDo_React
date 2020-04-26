@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import listSvg from './assets/img/list.svg';
 import addSvg from './assets/img/add.svg';
 import List from './Components/List/List'
-import AddListButton from "./Components/AddButtonLixt";
+import AddList from "./Components/AddList/AddButtonList";
 
 function App() {
   const[value, setValue] = React.useState('Hello');
@@ -11,7 +11,7 @@ function App() {
   return (
   <div className="todo">
     <div className="todo__sidebar">
-      <button onClick={()=>{setValue('Archakov Blog')}}> Обновить</button>
+
       <List items={[
         {
           icon:  <img src={listSvg} alt="Index icon"/>,
@@ -43,7 +43,7 @@ function App() {
              isRemovable
       />
 
-<AddListButton/>
+<AddList/>
 
     </div>
     <div className="todo__tasks">
