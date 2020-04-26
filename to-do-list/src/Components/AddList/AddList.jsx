@@ -3,6 +3,7 @@ import List from "../List/List";
 import addSvg from "../../assets/img/add.svg";
 import './AddList.scss'
 import Badge from "../Badge/Badge";
+import closeSvg from '../../assets/img/close.svg'
 
 
 const AddList =({colors})=>{
@@ -25,20 +26,18 @@ const[selectedColor, selectColor] = useState(colors[1].id);
         />
 
       { visiblePopup &&
+
       <div className="add-list__popup">
+          <img onClick={() => setVisiblePopup(false)} src={closeSvg} alt="Close button" className="add-list__popup-close-btn"/>
           <input className="field" type="text" placeholder="Название списка"/>
           <div className="add-list__popup-colors">
-
-
-                  {
-                      colors.map(color=>
+                  {colors.map(color=>
                           <Badge
                           onClick={()=> selectColor(color.id)}
                           key={color.id}
                           color={color.name}
                           className={selectedColor === color.id && 'active'}
-                          />)
-                  }
+                          />)}
 
 
           </div>
