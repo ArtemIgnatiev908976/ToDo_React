@@ -1,14 +1,14 @@
 import React, {useState} from "react";
 import List from "../List/List";
 import addSvg from "../../assets/img/add.svg";
-import './AddButtonList.scss'
+import './AddList.scss'
 import Badge from "../Badge/Badge";
 
 
 const AddList =({colors})=>{
 
 const[visiblePopup, setVisiblePopup] = useState(false);
-const[selectedColor, selectColor] = useState();
+const[selectedColor, selectColor] = useState(colors[1].id);
 
     return(
         <div className="add-list">
