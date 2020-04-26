@@ -1,12 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 import listSvg from './assets/img/list.svg';
 import addSvg from './assets/img/add.svg';
 import List from './Components/List/List'
+import AddListButton from "./Components/AddButtonLixt";
 
 function App() {
+  const[value, setValue] = React.useState('Hello');
+
+
   return (
   <div className="todo">
     <div className="todo__sidebar">
+      <button onClick={()=>{setValue('Archakov Blog')}}> Обновить</button>
       <List items={[
         {
           icon:  <img src={listSvg} alt="Index icon"/>,
@@ -16,7 +21,9 @@ function App() {
       ]
       }
       />
-      <List items={[
+      <List
+
+          items={[
         {
           color: "green",
           name: 'Покупки'
@@ -35,17 +42,8 @@ function App() {
       }
              isRemovable
       />
-      <List items={[
-        {
-          className: "list__add-button",
-          icon: <img src={addSvg} alt="Index icon" />,
-          name: 'Добавить список'
-        },
-      ]
-      }
-            isRemovable
-      />
 
+<AddListButton/>
 
     </div>
     <div className="todo__tasks">
