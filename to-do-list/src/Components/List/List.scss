@@ -18,6 +18,11 @@
 
       cursor: pointer;
     }
+
+    .badge{
+      position: relative;
+      left: 5px;
+    }
   }
   i{
     display: inline-flex;
@@ -26,22 +31,6 @@
       opacity: 0.6;
     }
 
-    .badge{
-      width: 10px;
-      height: 10px;
-      border-radius: 30px;
-      position: relative;
-      left: 5px;
-      &--green{
-        background-color: #42B883;
-      }
-      &--blue{
-        background-color: #64c4ed;
-      }
-      &--pink{
-        background-color: #ffbbcc;
-      }
 
-    }
   }
 }
