@@ -6,6 +6,12 @@ import AddList from "./Components/AddList/AddList";
 import DB from './assets/db.json'
 
 function App() {
+  const [lists, setLists] = useState(DB.lists.map(item => {
+    item.color =
+        DB.colors.filter(color=> color.id === item.colorId)[0].name;  //фильтруем весь массив если совпадает пихаем его туда
+    console.log(item);
+    return item;
+  }));   //после вызова возращает массив из двух элементов с помощью деструктуризации
   const[value, setValue] = React.useState('Hello');
 
 
@@ -24,23 +30,7 @@ function App() {
       />
       <List
 
-          items={[
-        {
-          color: "green",
-          name: 'Покупки'
-        },
-
-        {
-          color: "blue",
-          name: 'Фронтенд'
-        },
-        {
-          color: "pink",
-          name: 'Фильмы и сериалы',
-          active: true
-        },
-      ]
-      }
+          items={lists}
              isRemovable
       />
 
