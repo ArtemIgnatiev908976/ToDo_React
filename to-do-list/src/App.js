@@ -15,6 +15,14 @@ function App() {
   const[value, setValue] = React.useState('Hello');
 
 
+//спред взяли массив и прикрутили новый массив конкьютинация добавляем новое изменение в конец списка
+const onAddList = obj => {
+  const newList = [...lists, obj];
+ setLists(newList);
+};
+
+
+
   return (
   <div className="todo">
     <div className="todo__sidebar">
@@ -34,7 +42,7 @@ function App() {
              isRemovable
       />
 
-<AddList colors={DB.colors}/>
+<AddList onAdd={onAddList} colors={DB.colors}/>
 
     </div>
     <div className="todo__tasks">
