@@ -3,6 +3,7 @@ import listSvg from './assets/img/list.svg';
 import addSvg from './assets/img/add.svg';
 import List from './Components/List/List'
 import AddList from "./Components/AddList/AddList";
+import Tasks from "./Components/Tasks/Tasks";
 import DB from './assets/db.json'
 
 function App() {
@@ -48,10 +49,8 @@ const onAddList = obj => {
     </div>
     <div className="todo__tasks">
 
+    <Tasks />
 
-     <div className="tasks">
-       <h2 className="tasks__title">Фронтенд</h2>
-     </div>
     </div>
   </div>
   );
