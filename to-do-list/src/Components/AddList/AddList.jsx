@@ -6,6 +6,10 @@ import Badge from "../Badge/Badge";
 import closeSvg from '../../assets/img/close.svg'
 
 
+
+
+
+
 const AddList =({colors, onAdd})=>{
 
 const[visiblePopup, setVisiblePopup] = useState(false);
@@ -23,10 +27,18 @@ const  addList=()=>{
         color
         // "color": color
     });
-    setVisiblePopup(false); //Скрывает форму при добавлении нового списка
-    setInputValue(''); //очистка текста при добавлении
-    selectColor(colors[0].id); //очистка цвета при добавлении
-}
+    onClose();
+
+};
+
+
+//функция нажатия на крестик
+        const onClose = () => {
+            setVisiblePopup(false); //Скрывает форму при добавлении нового списка
+            setInputValue(''); //очистка текста при добавлении
+            selectColor(colors[0].id); //очистка цвета при добавлении
+        };
+
 
 
 console.log(inputValue);
@@ -48,7 +60,7 @@ console.log(inputValue);
       { visiblePopup &&
 
       <div className="add-list__popup">
-          <img onClick={() => setVisiblePopup(false)} src={closeSvg} alt="Close button" className="add-list__popup-close-btn"/>
+          <img onClick={onClose} src={closeSvg} alt="Close button" className="add-list__popup-close-btn"/>
           <input onChange={e => setInputValue(e.target.value)} value={inputValue} className="field" type="text" placeholder="Название списка"/>
           <div className="add-list__popup-colors">
                   {colors.map(color=>
