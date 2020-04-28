@@ -9,7 +9,7 @@ import closeSvg from '../../assets/img/close.svg'
 const AddList =({colors, onAdd})=>{
 
 const[visiblePopup, setVisiblePopup] = useState(false);
-const[selectedColor, selectColor] = useState(colors[1].id);
+const[selectedColor, selectColor] = useState(colors[0].id);
 const [inputValue, setInputValue] = useState('');
 const  addList=()=>{
     if (!inputValue){  //Проверка на пустое значение
@@ -24,6 +24,8 @@ const  addList=()=>{
         // "color": color
     });
     setVisiblePopup(false); //Скрывает форму при добавлении нового списка
+    setInputValue(''); //очистка текста при добавлении
+    selectColor(colors[0].id); //очистка цвета при добавлении
 }
 
 
