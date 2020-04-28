@@ -22,9 +22,11 @@ const Tasks = () => {
                        <input id="check" type="checkbox"/>
                        <label htmlFor="check">
                            <img src={checkSvg} alt="Check icon"/>
-                       </label>
-                   </div>
 
+                       </label>
+
+                   </div>
+                   <p> 123123</p>
 
                </div>
 
