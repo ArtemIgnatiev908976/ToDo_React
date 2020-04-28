@@ -48,6 +48,10 @@ const onAddList = obj => {
     </div>
     <div className="todo__tasks">
 
+
+     <div className="tasks">
+       <h2 className="tasks__title">Фронтенд</h2>
+     </div>
     </div>
   </div>
   );

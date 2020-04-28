@@ -17,6 +17,7 @@ body {
 }
 
 .todo {
+  display: flex;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -34,6 +35,21 @@ body {
     height: calc(100% - 120px);
     border-right: 1px solid #f1f1f1;
     padding: 60px 20px;
+  }
+
+  &__tasks{
+    padding: 60px;
+    flex: 1;
+  }
+}
+
+.tasks{
+  &__title{
+    font-family: Montserrat;
+    font-weight: bold;
+    font-size: 32px;
+    line-height: 39px;
+    color: #64c4ed;
   }
 }
 
