@@ -20,8 +20,10 @@ const  addList=()=>{
     onAdd( {
         "id": Math.random(),
         "name": inputValue,
-        "color": color
+        color
+        // "color": color
     });
+    setVisiblePopup(false); //Скрывает форму при добавлении нового списка
 }
 
 
