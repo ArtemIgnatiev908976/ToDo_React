@@ -39,6 +39,7 @@ const onAddList = obj => {
       <List
 
           items={lists}
+          onRemove={()=>{alert(123)}}
              isRemovable
       />
 

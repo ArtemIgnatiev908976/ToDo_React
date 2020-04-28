@@ -6,9 +6,15 @@ import Badge from '../Badge/Badge'
 import  removeSvg from '../../assets/img/remove.svg'
 
 
-const List = ({items, isRemovable, onClick}) =>{
+const List = ({items, isRemovable, onClick, onRemove}) =>{
     // const obj={a:1, b: 1}; //деструкторизация -взять свойста и превратить в переменные
     // const { a } = obj;
+
+    const removeList  =(item)=>{
+        if (window.confirm('Вы действительно хотите удалить список?')){
+            onRemove(item);
+        }
+    };
     return(
         <ul onClick={onClick} className="list">
             {
@@ -18,7 +24,7 @@ const List = ({items, isRemovable, onClick}) =>{
                         {/*//передаем строчку которая содержит текст с помощью библиотеки classesnames*/}
                         <i>{item.icon ? (item.icon) : (<Badge color={item.color} />)}</i>
                     <span>{item.name}</span>
-                        {isRemovable && <img className="list__remove-icon" src={removeSvg} alt="Remove icon"/> }
+                        {isRemovable && <img className="list__remove-icon" src={removeSvg} alt="Remove icon" onClick={()=>removeList(item)}/> }
 
                     </li>
                 )
