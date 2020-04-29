@@ -7,26 +7,35 @@ import axios from 'axios';
 
 function App() {
 
+  const [lists, setLists] = useState(null);
+  const [colors, setColors] = useState(null);
+
+  useEffect(() => {
+    axios
+        .get('http://localhost:3001/lists?_expand=color&_embed=tasks')
+        .then(({ data }) => {
+          setLists(data);
+        });
+    axios.get('http://localhost:3001/colors').then(({ data }) => {
+      setColors(data);
+    });
+  }, []);
 
 
 
 
-  const [lists, setLists] = useState(DB.lists.map(item => {
-    item.color =
-        DB.colors.filter(color=> color.id === item.colorId)[0].name;  //фильтруем весь массив если совпадает пихаем его туда
-    console.log(item);
-    return item;
-  }));   //после вызова возращает массив из двух элементов с помощью деструктуризации
+
+
+  // const [lists, setLists] = useState(DB.lists.map(item => {
+  //   item.color =
+  //       DB.colors.filter(color=> color.id === item.colorId)[0].name;  //фильтруем весь массив если совпадает пихаем его туда
+  //   console.log(item);
+  //   return item;
+  // }));   //после вызова возращает массив из двух элементов с помощью деструктуризации
   const[value, setValue] = React.useState('Hello');
 //спред взяли массив и прикрутили новый массив конкьютинация добавляем новое изменение в конец списка
 
 
-
-  useEffect(()=>{
-    axios.get('http://localhost:3001/lists?_expend=color').then(({data}) => {
-      console.log(data)
-    });
-  },[]);
 
 
 
@@ -52,21 +61,22 @@ const onAddList = obj => {
       ]
       }
       />
-      <List
-
-          items={lists}
-          onRemove={()=>{alert(123)}}
-             isRemovable
-      />
-
-<AddList onAdd={onAddList} colors={DB.colors}/>
+      {lists ? (
+          <List
+              items={lists}
+              onRemove={id => {
+                const newLists = lists.filter(item => item.id !== id);
+                setLists(newLists);
+              }}
+              isRemovable
+          />
+      ) : (
+          'Загрузка...'
+      )}
+      <AddList onAdd={onAddList} colors={colors} />
 
     </div>
-    <div className="todo__tasks">
-
-    <Tasks />
-
-    </div>
+    <div className="todo__tasks">{lists && <Tasks list={lists[1]} />}</div>
   </div>
   );
 }
