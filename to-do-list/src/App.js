@@ -1,16 +1,37 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import listSvg from './assets/img/list.svg';
 import addSvg from './assets/img/add.svg';
+import axios from  'axios'
 import {List, AddList, Tasks} from "./Components";
 import DB from './assets/db.json'
 
 function App() {
-  const [lists, setLists] = useState(DB.lists.map(item => {
-    item.color =
-        DB.colors.filter(color=> color.id === item.colorId)[0].name;  //фильтруем весь массив если совпадает пихаем его туда
-    console.log(item);
-    return item;
-  }));   //после вызова возращает массив из двух элементов с помощью деструктуризации
+
+
+  const [lists, setLists] = useState(null);
+  const [colors, setColors] = useState(null);
+  // const [lists, setLists] = useState(DB.lists.map(item => {
+  //   item.color =
+  //       DB.colors.filter(color=> color.id === item.colorId)[0].name;  //фильтруем весь массив если совпадает пихаем его туда
+  //   console.log(item);
+  //   return item;
+  // }));   //после вызова возращает массив из двух элементов с помощью деструктуризации
+
+
+  useEffect(() => {
+    axios.get('http://localhost:3001/lists?_expand=color').then(({ data }) => {
+          setLists(data);
+        });
+    axios.get('http://localhost:3001/colors').then(({ data }) => {
+      setColors(data);
+    });
+  }, []);
+  //хук вызовет при изменнении чего-то
+
+
+
+
+
   const[value, setValue] = React.useState('Hello');
 
 
@@ -42,7 +63,7 @@ const onAddList = obj => {
              isRemovable
       />
 
-<AddList onAdd={onAddList} colors={DB.colors}/>
+<AddList onAdd={onAddList} colors={colors}/>
 
     </div>
     <div className="todo__tasks">

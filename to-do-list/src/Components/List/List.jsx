@@ -21,7 +21,7 @@ const List = ({items, isRemovable, onClick, onRemove}) =>{
                 items.map((item, index) =>(
                     <li key={index}
                         className={classNames(item.className, {active: item.active})}>
-                        {/*//передаем строчку которая содержит текст с помощью библиотеки classesnames*/}
+                        /*//передаем строчку которая содержит текст с помощью библиотеки classesnames*/
                         <i>{item.icon ? (item.icon) : (<Badge color={item.color} />)}</i>
                     <span>{item.name}</span>
                         {isRemovable && <img className="list__remove-icon" src={removeSvg} alt="Remove icon" onClick={()=>removeList(item)}/> }
