@@ -1,43 +1,24 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import listSvg from './assets/img/list.svg';
 import addSvg from './assets/img/add.svg';
-<<<<<<< HEAD
-import axios from  'axios'
 import {List, AddList, Tasks} from "./Components";
-=======
-import List from './Components/List/List'
-import AddList from "./Components/AddList/AddList";
-import Tasks from "./Components/Tasks/Tasks";
->>>>>>> parent of e2340d3... Перенес подключение компонентов в один  файл
-import DB from './assets/db.json'
+import DB from './assets/db.json';
+import axios from 'axios';
 
 function App() {
 
 
-  const [lists, setLists] = useState(null);
-  const [colors, setColors] = useState(null);
-  // const [lists, setLists] = useState(DB.lists.map(item => {
-  //   item.color =
-  //       DB.colors.filter(color=> color.id === item.colorId)[0].name;  //фильтруем весь массив если совпадает пихаем его туда
-  //   console.log(item);
-  //   return item;
-  // }));   //после вызова возращает массив из двух элементов с помощью деструктуризации
+  axios.get('http://localhost:3001/lists?_expend=color').then(({data}) => {
+    console.log(data)
+  });
 
 
-  useEffect(() => {
-    axios.get('http://localhost:3001/lists?_expand=color').then(({ data }) => {
-          setLists(data);
-        });
-    axios.get('http://localhost:3001/colors').then(({ data }) => {
-      setColors(data);
-    });
-  }, []);
-  //хук вызовет при изменнении чего-то
-
-
-
-
-
+  const [lists, setLists] = useState(DB.lists.map(item => {
+    item.color =
+        DB.colors.filter(color=> color.id === item.colorId)[0].name;  //фильтруем весь массив если совпадает пихаем его туда
+    console.log(item);
+    return item;
+  }));   //после вызова возращает массив из двух элементов с помощью деструктуризации
   const[value, setValue] = React.useState('Hello');
 
 
@@ -69,7 +50,7 @@ const onAddList = obj => {
              isRemovable
       />
 
-<AddList onAdd={onAddList} colors={colors}/>
+<AddList onAdd={onAddList} colors={DB.colors}/>
 
     </div>
     <div className="todo__tasks">
