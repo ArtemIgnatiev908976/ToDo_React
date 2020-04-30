@@ -1,6 +1,6 @@
 import React from 'react';
 import editSvg from '../../assets/img/edit.svg';
-
+import axios from 'axios'
 import './Tasks.scss';
 
 const Tasks = ({ list, onEditTitle }) => {
@@ -8,6 +8,11 @@ const Tasks = ({ list, onEditTitle }) => {
         const newTitle =window.prompt('Название списка', list.name);
         if (newTitle){
             onEditTitle(list.id, newTitle);
+            axios.patch('http://localhost:3001/lists/' + list.id, {
+                name: newTitle
+            }).catch(()=>{
+                alert('Не удалось обновить название списка');
+            });
         }
     }
 
