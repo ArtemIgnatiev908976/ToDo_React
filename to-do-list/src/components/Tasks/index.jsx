@@ -3,12 +3,20 @@ import editSvg from '../../assets/img/edit.svg';
 
 import './Tasks.scss';
 
-const Tasks = ({ list }) => {
+const Tasks = ({ list, onEditTitle }) => {
+    const editTitle =()=>{
+        const newTitle =window.prompt('Название списка', list.name);
+        if (newTitle){
+            onEditTitle(list.id, newTitle);
+        }
+    }
+
+
   return (
     <div className="tasks">
       <h2 className="tasks__title">
         {list.name}
-        <img src={editSvg} alt="Edit icon" />
+        <img onClick={editTitle} src={editSvg} alt="Edit icon" />
       </h2>
 
       <div className="tasks__items">
