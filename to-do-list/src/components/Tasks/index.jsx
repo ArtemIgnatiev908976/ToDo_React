@@ -1,21 +1,26 @@
 import React from 'react';
+import axios from 'axios';
+
 import editSvg from '../../assets/img/edit.svg';
-import axios from 'axios'
+
 import './Tasks.scss';
 
-const Tasks = ({ list, onEditTitle }) => {
-    const editTitle =()=>{
-        const newTitle =window.prompt('Название списка', list.name);
-        if (newTitle){
-            onEditTitle(list.id, newTitle);
-            axios.patch('http://localhost:3001/lists/' + list.id, {
-                name: newTitle
-            }).catch(()=>{
-                alert('Не удалось обновить название списка');
-            });
-        }
-    }
+import AddTaskForm from './AddTaskForm';
 
+const Tasks = ({ list, onEditTitle, onAddTask }) => {
+  const editTitle = () => {
+    const newTitle = window.prompt('Название списка', list.name);
+    if (newTitle) {
+      onEditTitle(list.id, newTitle);
+      axios
+        .patch('http://localhost:3001/lists/' + list.id, {
+          name: newTitle
+        })
+        .catch(() => {
+          alert('Не удалось обновить название списка');
+        });
+    }
+  };
 
   return (
     <div className="tasks">
@@ -25,7 +30,7 @@ const Tasks = ({ list, onEditTitle }) => {
       </h2>
 
       <div className="tasks__items">
-          {!list.tasks.length && <h2>Задачи отсутствуют</h2>}
+        {!list.tasks.length && <h2>Задачи отсутствуют</h2>}
         {list.tasks.map(task => (
           <div key={task.id} className="tasks__items-row">
             <div className="checkbox">
@@ -51,6 +56,7 @@ const Tasks = ({ list, onEditTitle }) => {
             <input readOnly value={task.text} />
           </div>
         ))}
+        <AddTaskForm list={list} onAddTask={onAddTask} />
       </div>
     </div>
   );
